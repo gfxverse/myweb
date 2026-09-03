@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>gfxverse — Design & Motion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #FBF9F4;
+    --bg-alt: #F3EEE0;
+    --navy: #0F1B2E;
+    --navy-deep: #081120;
+    --ink: #12203A;
+    --ink-soft: #56607A;
+    --accent: #C9A227;
+    --accent-light: #E4C767;
+    --accent-soft: #FBF0CC;
+    --line: #E1DCC9;
+    --max-w: 1120px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  .wrap {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ---------- Header ---------- */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(247,246,243,0.88);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 32px;
+    max-width: var(--max-w);
+    margin: 0 auto;
+  }
+
+  .logo {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+  .logo span { color: var(--accent); font-style: italic; }
+
+  nav.links {
+    display: flex;
+    gap: 36px;
+    font-size: 15px;
+    color: var(--ink-soft);
+  }
+  nav.links a { transition: color .2s ease; }
+  nav.links a:hover { color: var(--ink); }
+
+  .nav-cta {
+    font-size: 14px;
+    padding: 9px 18px;
+    border: 1px solid var(--ink);
+    border-radius: 2px;
+    color: var(--ink);
+    transition: background .2s ease, color .2s ease;
+  }
+  .nav-cta:hover { background: var(--ink); color: var(--bg); }
+
+  .menu-toggle { display: none; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    padding: 110px 0 90px;
+    background: var(--navy);
+    color: #F5F1E6;
+    opacity: 0;
+    transform: translateY(14px);
+    animation: rise .9s ease forwards .1s;
+  }
+  .hero .eyebrow { color: var(--accent); }
+  .hero h1 { color: #FBF8EF; }
+  .hero-side p { color: #C7CEDD; }
+
+  @keyframes rise {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 64px;
+    align-items: end;
+  }
+
+  .eyebrow {
+    font-size: 14px;
+    color: var(--accent);
+    margin-bottom: 22px;
+    font-style: italic;
+    font-family: 'Fraunces', serif;
+  }
+
+  .hero h1 {
+    font-size: clamp(40px, 5.4vw, 68px);
+    line-height: 1.06;
+    max-width: 15ch;
+  }
+
+  .hero-side {
+    padding-bottom: 6px;
+  }
+
+  .hero-side p {
+    color: var(--ink-soft);
+    font-size: 16px;
+    max-width: 38ch;
+    margin: 0 0 22px;
+  }
+
+  .tool-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .tool-pill {
+    font-size: 13px;
+    padding: 6px 12px;
+    border: 1px solid rgba(245,241,230,0.28);
+    border-radius: 999px;
+    color: #E7E2D2;
+  }
+
+  /* ---------- Section shared ---------- */
+  section { padding: 90px 0; }
+  .section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 48px;
+    gap: 24px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 24px;
+  }
+  .section-head h2 { font-size: clamp(28px, 3.4vw, 38px); }
+  .section-head p { color: var(--ink-soft); max-width: 34ch; margin: 8px 0 0; font-size: 15px; }
+
+  /* ---------- Portfolio ---------- */
+  #work { background: var(--bg-alt); }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: 130px;
+    gap: 18px;
+  }
+
+  .piece {
+    position: relative;
+    border-radius: 3px;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    padding: 20px;
+    color: #fff;
+    cursor: default;
+  }
+  .piece .tag {
+    font-size: 12px;
+    letter-spacing: 0.02em;
+    opacity: 0.85;
+  }
+  .piece .name {
+    font-family: 'Fraunces', serif;
+    font-size: 19px;
+    margin-top: 4px;
+  }
+  .piece::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.45) 100%);
+  }
+  .piece > * { position: relative; z-index: 1; }
+
+  .p1 { grid-column: span 3; grid-row: span 2; background: linear-gradient(135deg,#0F1B2E,#1B3A66); }
+  .p2 { grid-column: span 3; grid-row: span 1; background: linear-gradient(135deg,#C9A227,#8F6F14); }
+  .p3 { grid-column: span 3; grid-row: span 1; background: linear-gradient(135deg,#1B3A66,#C9A227); }
+  .p4 { grid-column: span 2; grid-row: span 2; background: linear-gradient(135deg,#081120,#0F1B2E); }
+  .p5 { grid-column: span 2; grid-row: span 2; background: linear-gradient(135deg,#E4C767,#C9A227); }
+  .p6 { grid-column: span 2; grid-row: span 2; background: linear-gradient(135deg,#1B3A66,#081120); }
+
+  .gallery-note {
+    margin-top: 28px;
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+
+  /* ---------- Services ---------- */
+  .service-list {
+    border-top: 1px solid var(--line);
+  }
+  .service-row {
+    display: grid;
+    grid-template-columns: 1.1fr 2fr 1fr;
+    gap: 24px;
+    padding: 30px 0;
+    border-bottom: 1px solid var(--line);
+    align-items: center;
+  }
+  .service-row h3 {
+    font-size: 22px;
+    font-weight: 500;
+  }
+  .service-row p {
+    color: var(--ink-soft);
+    font-size: 15px;
+    margin: 0;
+    max-width: 46ch;
+  }
+  .service-row .format {
+    font-size: 13px;
+    color: var(--accent);
+    text-align: right;
+  }
+
+  /* ---------- Contact ---------- */
+  #contact { background: var(--navy); color: #F0ECDF; }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 72px;
+  }
+
+  .contact-intro h2 { font-size: clamp(30px, 3.6vw, 42px); margin-bottom: 18px; color: #FBF8EF; }
+  .contact-intro p { color: #C7CEDD; max-width: 36ch; }
+
+  .contact-meta { margin-top: 36px; }
+  .contact-meta div {
+    font-size: 14px;
+    color: #C7CEDD;
+    margin-bottom: 8px;
+  }
+  .contact-meta a:hover { color: var(--accent-light); }
+
+  form { display: flex; flex-direction: column; gap: 26px; }
+
+  .field { position: relative; }
+  .field label {
+    display: block;
+    font-size: 13px;
+    color: #B9C1D6;
+    margin-bottom: 8px;
+  }
+  .field input, .field textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(245,241,230,0.3);
+    padding: 8px 2px;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 16px;
+    color: #F5F1E6;
+    outline: none;
+    transition: border-color .2s ease;
+  }
+  .field input:focus, .field textarea:focus { border-color: var(--accent); }
+  .field textarea { resize: vertical; min-height: 80px; }
+
+  .submit-btn {
+    align-self: flex-start;
+    margin-top: 6px;
+    padding: 13px 30px;
+    background: var(--accent);
+    color: var(--navy-deep);
+    border: none;
+    border-radius: 2px;
+    font-size: 15px;
+    font-weight: 500;
+    font-family: 'Work Sans', sans-serif;
+    cursor: pointer;
+    transition: background .2s ease;
+  }
+  .submit-btn:hover { background: var(--accent-light); }
+
+  .form-status {
+    font-size: 13.5px;
+    color: var(--accent-light);
+    min-height: 18px;
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    padding: 36px 0;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13.5px;
+    color: var(--ink-soft);
+  }
+  footer .logo { font-size: 15px; }
+
+  @media (max-width: 860px) {
+    nav.links { display: none; }
+    .hero-grid { grid-template-columns: 1fr; gap: 30px; }
+    .gallery { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 150px; }
+    .p1, .p2, .p3, .p4, .p5, .p6 { grid-column: span 2; grid-row: span 1; }
+    .service-row { grid-template-columns: 1fr; gap: 8px; }
+    .service-row .format { text-align: left; }
+    .contact-grid { grid-template-columns: 1fr; gap: 46px; }
+    footer { flex-direction: column; gap: 10px; align-items: flex-start; }
+  }
+
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero { animation: none; opacity: 1; transform: none; }
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <div class="logo">gfx<span>verse</span></div>
+    <nav class="links">
+      <a href="#home">Home</a>
+      <a href="#work">Design</a>
+      <a href="#services">Templates</a>
+      <a href="#contact">Contact us</a>
+    </nav>
+    <a href="#contact" class="nav-cta">Start a project</a>
+  </div>
+</header>
+
+<section class="hero" id="home">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Graphic design & motion</div>
+      <h1>Visuals that hold attention, and design that gets things done.</h1>
+    </div>
+    <div class="hero-side">
+      <p>I'm the designer behind gfxverse — I edit reels, cut video, design banners, and put together the decks and documents that make a project look finished. If it needs to look good and go out today, this is where it gets made.</p>
+      <div class="tool-row">
+        <span class="tool-pill">Premiere Pro</span>
+        <span class="tool-pill">Photoshop</span>
+        <span class="tool-pill">After Effects</span>
+        <span class="tool-pill">Illustrator</span>
+        <span class="tool-pill">PowerPoint</span>
+        <span class="tool-pill">Word</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Selected work</h2>
+        <p>A mix of banners, reels, and documents from recent projects.</p>
+      </div>
+    </div>
+    <div class="gallery">
+      <div class="piece p1"><div><div class="tag">Reel edit</div><div class="name">Product launch teaser</div></div></div>
+      <div class="piece p2"><div><div class="tag">Banner design</div><div class="name">Festive sale campaign</div></div></div>
+      <div class="piece p3"><div><div class="tag">PPT deck</div><div class="name">Brand pitch presentation</div></div></div>
+      <div class="piece p4"><div><div class="tag">Video edit</div><div class="name">Event highlight reel</div></div></div>
+      <div class="piece p5"><div><div class="tag">Banner design</div><div class="name">Social media set</div></div></div>
+      <div class="piece p6"><div><div class="tag">Document design</div><div class="name">Company profile</div></div></div>
+    </div>
+    <p class="gallery-note">Placeholder tiles — replace these with your own work images once you have them ready.</p>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>What I work on</h2>
+        <p>Design and edit work, scoped to what you actually need.</p>
+      </div>
+    </div>
+    <div class="service-list">
+      <div class="service-row">
+        <h3>Video editing</h3>
+        <p>Full edits for YouTube, ads, and brand videos — cutting, pacing, color, and sound handled start to finish.</p>
+        <div class="format">MP4 delivery</div>
+      </div>
+      <div class="service-row">
+        <h3>Reel editing</h3>
+        <p>Fast-turnaround short-form edits built for Instagram and YouTube Shorts, cut for retention from the first second.</p>
+        <div class="format">9:16, captioned</div>
+      </div>
+      <div class="service-row">
+        <h3>Banner design</h3>
+        <p>Web banners, social posts, and ad creatives designed to match your brand and stop the scroll.</p>
+        <div class="format">PNG / JPG</div>
+      </div>
+      <div class="service-row">
+        <h3>Presentation design</h3>
+        <p>PowerPoint decks that look considered — pitch decks, reports, and internal presentations.</p>
+        <div class="format">PPT / PDF</div>
+      </div>
+      <div class="service-row">
+        <h3>Document design</h3>
+        <p>Word documents formatted properly — proposals, resumes, and reports that read as professional.</p>
+        <div class="format">DOCX / PDF</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap contact-grid">
+    <div class="contact-intro">
+      <h2>Let's put something together.</h2>
+      <p>Tell me what you need designed or edited, and I'll get back to you with timing and cost.</p>
+      <div class="contact-meta">
+        <div>Email: <a href="mailto:hello@gfxverse.com">hello@gfxverse.com</a></div>
+        <div>Instagram: <a href="#">@gfxverse</a></div>
+      </div>
+    </div>
+    <form id="contact-form">
+      <div class="field">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="field">
+        <label for="message">What do you need?</label>
+        <textarea id="message" name="message" required></textarea>
+      </div>
+      <button type="submit" class="submit-btn">Send message</button>
+      <div class="form-status" id="form-status"></div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="logo">gfx<span style="color:var(--accent);font-style:italic;">verse</span></div>
+  <div>&copy; 2026 gfxverse. All rights reserved.</div>
+</footer>
+
+<script>
+  const form = document.getElementById('contact-form');
+  const status = document.getElementById('form-status');
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    status.textContent = "Thanks — this form isn't connected to an inbox yet. Email hello@gfxverse.com directly for now.";
+    form.reset();
+  });
+</script>
+
+</body>
+</html>
